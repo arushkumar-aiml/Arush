@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechFest Parallax Experience</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    overflow-x:hidden;
+    background:#050816;
+    color:white;
+}
+
+.hero{
+    position:relative;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+.layer{
+    position:absolute;
+    width:120%;
+    height:120%;
+}
+
+.stars{
+    background:url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000") center/cover;
+    z-index:1;
+}
+
+.grid{
+    background:linear-gradient(
+        rgba(0,255,255,0.08),
+        rgba(0,255,255,0.01)
+    );
+    z-index:2;
+}
+
+.hero-content{
+    position:relative;
+    z-index:10;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:5rem;
+    text-transform:uppercase;
+    letter-spacing:5px;
+}
+
+.hero p{
+    margin-top:15px;
+    font-size:1.2rem;
+    opacity:0.9;
+}
+
+.scroll{
+    margin-top:20px;
+    color:#00ffff;
+}
+
+section{
+    min-height:100vh;
+    padding:100px 10%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+}
+
+.card{
+    max-width:900px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:20px;
+    padding:40px;
+}
+
+.card h2{
+    font-size:3rem;
+    margin-bottom:20px;
+}
+
+.card p{
+    line-height:1.8;
+}
+
+.parallax-section{
+    position:relative;
+    overflow:hidden;
+}
+
+.bg{
+    position:absolute;
+    inset:0;
+    background-size:cover;
+    background-position:center;
+    z-index:-2;
+    transform:translateZ(0);
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.5);
+    z-index:-1;
+}
+
+#innovation .bg{
+    background-image:url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2000");
+}
+
+#ai .bg{
+    background-image:url("https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2000");
+}
+
+#future .bg{
+    background-image:url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000");
+}
+
+footer{
+    padding:40px;
+    text-align:center;
+    background:#02040f;
+}
+
+.glow{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(80px);
+    opacity:.5;
+}
+
+.glow1{
+    width:300px;
+    height:300px;
+    background:cyan;
+    top:10%;
+    left:5%;
+}
+
+.glow2{
+    width:250px;
+    height:250px;
+    background:purple;
+    bottom:10%;
+    right:10%;
+}
+
+@media(max-width:768px){
+    .hero h1{
+        font-size:2.8rem;
+    }
+
+    .card h2{
+        font-size:2rem;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+
+    <div class="layer stars"></div>
+    <div class="layer grid"></div>
+
+    <div class="glow glow1"></div>
+    <div class="glow glow2"></div>
+
+    <div class="hero-content">
+        <h1>TECHFEST 2026</h1>
+        <p>Scroll to explore innovation, AI and the future.</p>
+        <div class="scroll">↓ Scroll Down ↓</div>
+    </div>
+
+</div>
+
+<section id="innovation" class="parallax-section">
+    <div class="bg"></div>
+    <div class="overlay"></div>
+
+    <div class="card">
+        <h2>Innovation</h2>
+        <p>
+            Discover groundbreaking technologies and creative solutions.
+            This parallax experience creates depth by moving background
+            elements slower than foreground content.
+        </p>
+    </div>
+</section>
+
+<section id="ai" class="parallax-section">
+    <div class="bg"></div>
+    <div class="overlay"></div>
+
+    <div class="card">
+        <h2>Artificial Intelligence</h2>
+        <p>
+            AI is transforming industries worldwide. Experience smooth
+            motion effects and immersive storytelling while scrolling.
+        </p>
+    </div>
+</section>
+
+<section id="future" class="parallax-section">
+    <div class="bg"></div>
+    <div class="overlay"></div>
+
+    <div class="card">
+        <h2>The Future</h2>
+        <p>
+            Technology, innovation and imagination combine to shape the
+            next generation of experiences.
+        </p>
+    </div>
+</section>
+
+<footer>
+    <h3>TechFest Parallax Project</h3>
+    <p>Designed using HTML, CSS & JavaScript</p>
+</footer>
+
+<script>
+
+const backgrounds = document.querySelectorAll(".bg");
+const layers = document.querySelectorAll(".layer");
+
+window.addEventListener("scroll", () => {
+
+    const scrollY = window.pageYOffset;
+
+    layers.forEach((layer,index)=>{
+        layer.style.transform =
+        `translateY(${scrollY*(0.15+(index*0.1))}px)`;
+    });
+
+    backgrounds.forEach(bg=>{
+        const speed = 0.4;
+        bg.style.transform =
+        `translateY(${scrollY*speed}px)`;
+    });
+
+});
+
+</script>
+
+</body>
+</html>
